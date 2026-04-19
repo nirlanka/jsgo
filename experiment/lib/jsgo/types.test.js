@@ -40,3 +40,40 @@ test("type creation should be successful for assert pass", () => {
 		email: "",
 	});
 })
+
+test("type composition should be successful for assert pass", () => {
+	class t_user_info extends type {
+		static assert({ name, email }) {
+			assert.type.string(name);
+			assert.type.string(email);
+		}
+	}
+
+	class t_job extends type {
+		static assert({ company, position }) {
+			assert.type.string(company);
+			assert.type.string(position);
+		}
+	} 
+
+	class t_resume extends type {
+		static assert(_) {
+			t_user_info.assert(_);
+			t_job.assert(_);
+		}
+	}
+
+	expect(new t_resume({
+		name: "John",
+		email: "j@doe.com",
+
+		company: "Apple",
+		position: "CEO",
+	})).toEqual({
+		name: "John",
+		email: "j@doe.com",
+
+		company: "Apple",
+		position: "CEO",
+	})
+})
