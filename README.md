@@ -262,35 +262,24 @@ class _Banner extends BaseComponent {
 ## Interfaces
 
 ```js
-class i_count_ref extends type {
-	//
+class i_user_auth extends type {
+	static assert({
+		login,
+		logout,
+	}) {
+		assert.type.function(login);
+		assert.type.function(logout);
+	}
 }
+
+let adminAuthService = new class {
+	login= async (userid, password) => Promise.resolve({ token: "abc123" })
+	logout= async (userid) => Promise.resolve({ token: 0 })
+} ();
+i_user_auth.assert(adminAuthService);
+
+let t1 = await adminAuthService.login("u1", "p");
 ```
-
-## Function Overloading
-
-TBA
-
-## Object/Variable References
-
-```js
-let countRef = {}
-```
-
-## Testing component UIs
-
-TODO
-
-## Testing functions (independent unit-tests)
-
-TODO
-
-## x
-
-
-
-
-
 
 
 
