@@ -5,15 +5,16 @@ import { assert } from "./_assert.js";
 
 export class type {
 	constructor(_) {
-		//// Assign object keys
+		let subtype = this.constructor;
 		assert.type.dict(_);
+		subtype.assert(_);
+
+		//// Assign object keys
 		Object.assign(this, _);
 
 		//// Run asserts
-		let subtype = this.constructor;
 		assert.type.function(subtype.assert, 
 			"subtype " + subtype.name + 
 			" should have `static assert(~)`");
-		subtype.assert(_);
 	}
 }

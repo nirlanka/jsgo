@@ -67,13 +67,34 @@ test("type composition should be successful for assert pass", () => {
 		name: "John",
 		email: "j@doe.com",
 
-		company: "Apple",
+		company: "Comp1",
 		position: "CEO",
 	})).toEqual({
 		name: "John",
 		email: "j@doe.com",
 
-		company: "Apple",
+		company: "Comp1",
 		position: "CEO",
 	})
+})
+
+test("type interfacing should be successful for assert pass", async () => {
+	class i_user_auth extends type {
+		static assert({
+			login,
+			logout,
+		}) {
+			assert.type.function(login);
+			assert.type.function(logout);
+		}
+	}
+
+	let adminAuthService = new class {
+		login= async (userid, password) => Promise.resolve({ token: "abc123" })
+		logout= async (userid) => Promise.resolve({ token: 0 })
+	} ();
+	i_user_auth.assert(adminAuthService);
+
+	let t1 = await adminAuthService.login("u1", "p");
+	expect(t1?.token).toEqual("abc123");
 })

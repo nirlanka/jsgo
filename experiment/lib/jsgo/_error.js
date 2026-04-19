@@ -1,6 +1,10 @@
 "use strict";
 // @ts-check
 
+/**
+ * @param {Function} fn
+ * @returns {{ error: Error, _: any }}
+ */
 export let flattenErrorSync = (fn) => {
 	let _;
 
@@ -13,6 +17,11 @@ export let flattenErrorSync = (fn) => {
 	return { _ };
 }
 
+/**
+ * @async
+ * @param {Function} fn
+ * @returns {{ error: Error, _: any }}
+ */
 export let flattenErrorAsync = async (fn) => {
 	let _;
 
