@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+bun ./experiment/lib/jsgo/testbed.html --watch

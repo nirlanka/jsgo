@@ -20,6 +20,7 @@ class AssertError extends Error {
 export let assert = (fn, m = "") => {
 	let error, result;
 
+	//// Not recommended to throw in prod code:
 	if (shouldThrow) {
 		result = fn();
 

@@ -28,13 +28,11 @@ Ideas:
 2. Don't define default fields outside constructor
 
 ```js
-import { t_type } from "lib/type.js";
-import { assert } from "lib/assert.js";
+import { type, assert, exists } from "lib/jsgo";
 
-import { exists } from "lib/syntax.js";
 import { emailRegex } from "./validation-regex.js";
 
-export class t_user_info extends t_type {
+export class t_user_info extends type {
 	static assert({
 		firstName,
 		lastName,
@@ -42,9 +40,9 @@ export class t_user_info extends t_type {
 
 		emailAddress,
 	}) {
-		assert.string(firstName);
-		assert.string(lastName);
-		if (exists(middleName)) assert.string(middleName);
+		assert.type.string(firstName);
+		assert.type.string(lastName);
+		if (exists(middleName)) assert.type.string(middleName);
 
 		assert(() => emailRegex.test(emailAddress));
 	}
@@ -71,15 +69,15 @@ Above example will cause a devtools console to show an `[ASSERT FAILURE]` error 
 ## Compositing custom-types
 
 ```js
-import { t_type } from "../lib/type.js";
+import { type } from "../lib/jsgo";
 
-export class t_user_job extends t_type {
+export class t_user_job extends type {
 	static assert({
 		companyName,
 		jobPosition,
 	}) {
-		assert.string(companyName);
-		assert.string(jobPosition);
+		assert.type.string(companyName);
+		assert.type.string(jobPosition);
 	}
 }
 ```
@@ -89,7 +87,7 @@ Implicit composition:
 /**
  * t_user_info | t_user_job
  */
-export class t_user_resume_1 extends t_type {
+export class t_user_resume_1 extends type {
 	static assert(_) {
 		t_user_info.assert(_);
 		t_user_job.assert(_);
@@ -103,7 +101,7 @@ Explicit composition:
  * @property {t_user_info} user
  * @property {t_user_job} job
  */
-export class t_user_resume_2 extends t_type {
+export class t_user_resume_2 extends type {
 	static assert({user, job}) {
 		t_user_info.assert(user);
 		t_user_job.assert(job);
@@ -134,7 +132,7 @@ export let getUserName = async (userId) => {
 
 The exception throwing functions can be flattened to match the above model (asynchronous):
 ```js
-import { wrapError  } from "../lib/syntax.js";
+import { flattenErrorAsync } from "../lib/syntax.js";
 
 import { t_user_info} from "./api-models.js";
 
@@ -144,7 +142,7 @@ import { t_user_info} from "./api-models.js";
 export let getUserInfo = async (userId) => {
 	assert.number(userId);
 
-	let { error: _1, _: resp } = await wrapError.async(fetch("/userinfo"));
+	let { error: _1, _: resp } = await flattenErrorAsync.async(fetch("/userinfo"));
 	if (exists(error)) return { error: "API call failed." };
 	let { error: _2, _ } = await wrapError.async(resp.json());
 
@@ -154,7 +152,7 @@ export let getUserInfo = async (userId) => {
 
 For synchronous throws:
 ```js
-import { wrapError } from "../lib/syntax.js"
+import { flattenErrorSync } from "../lib/jsgo"
 
 let DEFAULT_CONFIG = /*json*/`{
 	"theme": "dark"
@@ -164,7 +162,7 @@ let DEFAULT_CONFIG = /*json*/`{
  * @returns {{ error: Error, _: Object }}
  */
 export let getDefaultConfig = () => {
-	let { error, _ } = wrapError.sync(JSON.parse(DEFAULT_CONFIG));
+	let { error, _ } = flattenErrorSync.sync(JSON.parse(DEFAULT_CONFIG));
 	//// NOTE: `wrapError(~)` without `.async(~)` or `.sync(~)` is invalid.
 
 	if (exists(error)) return { error: new Error("Invalid config hard-coded") };
@@ -182,7 +180,7 @@ import { Div, Span } from "../lib/dom-aliases.js";
 class _Banner extends BaseComponent {
 	Dom = () => {
 		let { message } = this.props ?? {};
-		if (exists(message)) assert.string(message);
+		if (exists(message)) assert.type.string(message);
 
 		if (!exists(message)) return Div();
 
@@ -264,8 +262,8 @@ class _Banner extends BaseComponent {
 ## Interfaces
 
 ```js
-class i_count_ref extends t_type {
-	
+class i_count_ref extends type {
+	//
 }
 ```
 

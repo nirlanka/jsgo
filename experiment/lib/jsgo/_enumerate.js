@@ -1,9 +1,10 @@
 "use strict";
 // @ts-check
 
-import { type, assert } from "./";
+import { type } from "./_type.js";
+import { assert } from "./_assert.js";
 
-class _enum_dict extends type {
+class __enum_dict__ extends type {
 	static assert(_) {
 		for (let k in _) {
 			assert.type.string(_[k]);
@@ -30,5 +31,5 @@ export let enumerate = (defn) => {
 		_[k] = k;
 	}
 
-	return new _enum_dict(_);
+	return new __enum_dict__(_);
 }
