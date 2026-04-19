@@ -1,7 +1,7 @@
 JsGo - PureJS style-guide
 =========================
 
-*NOTE*: Please refer to unit test files for more up-to-date examples for the actual lib code and how to use them. (e.g. Now you can import from just one file "./lib/jsgo")
+*NOTE*: Please refer to unit test files for more up-to-date examples for the actual lib code and how to use them. 
 
 ## Some preferences
 
@@ -132,7 +132,7 @@ export let getUserName = async (userId) => {
 
 The exception throwing functions can be flattened to match the above model (asynchronous):
 ```js
-import { flattenErrorAsync } from "../lib/syntax.js";
+import { flattenErrorAsync } from "../lib/jsgo.js";
 
 import { t_user_info} from "./api-models.js";
 
