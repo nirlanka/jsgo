@@ -4,7 +4,7 @@
 import { type } from "./_type.js";
 import { assert } from "./_assert.js";
 
-class __enum_dict__ extends type {
+class __t_enum_dict__ extends type {
 	static assert(_) {
 		for (let k in _) {
 			assert.type.string(_[k]);
@@ -31,5 +31,5 @@ export let enumerate = (defn) => {
 		_[k] = k;
 	}
 
-	return new __enum_dict__(_);
+	return new __t_enum_dict__(_);
 }
