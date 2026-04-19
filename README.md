@@ -33,10 +33,6 @@ import { exists } from "lib/syntax.js";
 import { emailRegex } from "./validation-regex.js";
 
 export class t_user_info extends t_type {
-	constructor(..._) {
-		super(t_user_info, ..._);
-	}
-
 	static assert({
 		firstName,
 		lastName,
@@ -76,10 +72,6 @@ Above example will cause a devtools console to show an `[ASSERT FAILURE]` error 
 import { t_type } from "../lib/type.js";
 
 export class t_user_job extends t_type {
-	constructor(..._) {
-		super(t_user_job, ..._);
-	}
-
 	static assert({
 		companyName,
 		jobPosition,
@@ -96,10 +88,6 @@ Implicit composition:
  * t_user_info | t_user_job
  */
 export class t_user_resume_1 extends t_type {
-	constructor(..._) {
-		super(t_user_resume_1, ..._);
-	}
-
 	static assert(_) {
 		t_user_info.assert(_);
 		t_user_job.assert(_);
@@ -114,10 +102,6 @@ Explicit composition:
  * @property {t_user_job} job
  */
 export class t_user_resume_2 extends t_type {
-	constructor(..._) { //// same as t_user_resume_1
-		super(t_user_resume_2, ...args);
-	}
-
 	static assert({user, job}) {
 		t_user_info.assert(user);
 		t_user_job.assert(job);
