@@ -271,7 +271,7 @@ let btn1 = Button({
 	//// ... on<event_name>
 
 	textContent: "Test",
-	innerHtml: "<div>Test1</div>", //// overrides `textContent`
+	innerHtml: /*html*/`<div>Test1</div>`, //// overrides `textContent`
 	children: [ Div({ textContent: "Test3" }) ], //// overrides `innerHtml`
 
 	//// Element attributes:
