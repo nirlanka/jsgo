@@ -1,6 +1,8 @@
 JsGo - PureJS with style
 ========================
 
+*NOTE*: Please refer to unit test files for more up-to-date examples for the actual lib code and how to use them. (e.g. Now you can import from just one file "./lib/jsgo")
+
 ## Some preferences
 
 1. Always use `null` (instead of `undefined`)

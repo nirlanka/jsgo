@@ -3,7 +3,7 @@
 
 import { test, expect } from "bun:test";
 
-import { setAssertThrow, type, assert } from "./index.js";
+import { setAssertThrow, type, assert } from "./";
 
 setAssertThrow(true);
 
