@@ -281,22 +281,15 @@ i_user_auth.assert(adminAuthService);
 let t1 = await adminAuthService.login("u1", "p");
 ```
 
+## Enums
 
+`enumerate(~)` creates a dict object with values with the same string as key:
 
+```js
+let USER_ROLES = enumerate({
+	CUSTOMER: null,
+	ADMIN: null,
+})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# jsgo
+let USER_PERMS = enumerate(["READ", "WRITE"]);
+```
