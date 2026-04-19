@@ -247,9 +247,9 @@ export let Banner = defineWebComponent(class _Banner extends BaseComponent) {
 
 `dom-aliases.js` supports some common DOM elements, and for others, use the generic function:
 ```js
-import { Element } from "../lib/dom.js";
+import { Tag } from "../lib/dom.js";
 
-let Div = Element("div");
+let Div = Tag("div");
 let div1 = Div();
 ```
 
